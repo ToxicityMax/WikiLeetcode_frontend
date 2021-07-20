@@ -17,6 +17,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "spaced-comment": [0,"never"]
+    "spaced-comment": [0,"never"],
+    "prefer-const":[0,"always"]
   }
 }

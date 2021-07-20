@@ -64,18 +64,26 @@ export default {
     return {
       passShow: false,
       user: {
-        username: null,
-        password: null
+        username: '',
+        password: ''
       },
       required: value => !!value || 'Required.',
       min: v => (v && v.length >= 8) || 'Minimum 8 characters'
     }
   },
+  created() {
+    //code to get csrf token
+  },
   methods: {
-    validate() {
+    async validate(something) {
       if (this.$refs.login.validate()) {
-        console.log('SUCCESS')
         // CODE TO LOGIN USER
+        try {
+          let response = await this.$auth.loginWith('local', { data: this.user })
+          console.log(response)
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
   }

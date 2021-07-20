@@ -1,7 +1,6 @@
 <template>
-  <v-navigation-drawer ref='drawer' :width='navigation.width' :value='drawer' app clipped hide-overlay
-                       style='background-color: lightskyblue'>
-    <v-treeview class='pa-12' activatable transition hoverable :items=test>
+  <v-navigation-drawer ref='drawer' :width='navigation.width' :value='drawer' dark app clipped hide-overlay>
+    <v-treeview class='pa-12' activatable transition hoverable :items=test rounded>
     </v-treeview>
   </v-navigation-drawer>
 </template>
@@ -141,12 +140,12 @@ export default {
       const minSize = this.navigation.borderSize
       const el = this.$refs.drawer.$el
       const drawerBorder = el.querySelector('.v-navigation-drawer__border')
-      const direction = el.classList.contains('v-navigation-drawer--right') ? 'right': 'left'
+      const direction = el.classList.contains('v-navigation-drawer--right') ? 'right' : 'left'
 
       function resize(e) {
         document.body.style.cursor = 'ew-resize'
         const f =
-          direction === 'right' ? document.body.scrollWidth - e.clientX: e.clientX
+          direction === 'right' ? document.body.scrollWidth - e.clientX : e.clientX
         el.style.width = f + 'px'
       }
 

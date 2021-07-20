@@ -22,7 +22,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/markdownParser.js',
-    '~/plugins/highlight'],
+    ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,11 +40,40 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/auth'
   ],
-
+  // auth: {
+  //   strategies: {
+  //     cookie: {
+  //       cookie: {
+  //         // (optional) If set we check this cookie existence for loggedIn check
+  //         name: 'XCSRF-TOKEN'
+  //       }
+  //     },
+  //     local: {
+  //       token: {
+  //         required: false,
+  //         type: false
+  //       },
+  //       user: {
+  //         property: 'user',
+  //         autoFetch: false
+  //       },
+  //       endpoints: {
+  //         login: { url: 'login/', method: 'post', withCredentials: true },
+  //         logout: { url: 'logout', method: 'post' },
+  //         user: { url: '1login/', method: 'get' },
+  //         tokenRequired: false,
+  //         tokenType: false
+  //       }
+  //     }
+  //   }
+  // },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURI: 'http://127.0.0.1:8000/'
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -66,7 +95,8 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent3,
+          main: colors.teal.accent3
         }
       }
     }

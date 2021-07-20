@@ -1,55 +1,15 @@
 <template>
   <div>
-    <NavDrawer :drawer='drawer'>
+    <NavDrawer  :drawer='drawer'>
     </NavDrawer>
-    <v-app-bar app dense clipped-left>
-      <v-app-bar-nav-icon @click='drawer=!drawer'></v-app-bar-nav-icon>
-      <v-toolbar-title>Leetcode Wiki</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-text-field hide-details
-                    placeholder='Search'
-                    filled
-                    rounded
-                    dense
-                    append-icon='mdi-magnify' style='max-width: 350px'></v-text-field>
-      <v-spacer></v-spacer>
-      <v-menu offset-y>
-        <template #activator='{ on, attrs }'>
-          <v-btn
-            fab small
-            depressed
-            v-bind='attrs'
-            v-on='on'>
-            <img alt='userAvatar'  src='https://img.icons8.com/color/48/000000/user-male-circle--v1.png' />
-          </v-btn>
-        </template>
-        <v-list-item-group
-          light
-          color='success'
-        >
-          <v-list rounded>
-            <v-list-item color='teal accent-4'>
-              <v-list-item-content style='color: teal'> Settings</v-list-item-content>
-              <v-list-item-icon class='pl-3'>
-                <v-icon color='teal'>mdi-cog</v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-            <v-list-item color='teal accent-4'>
-              <v-list-item-content style='color: teal'>Logout</v-list-item-content>
-              <v-list-item-icon class='pl-3'>
-                <v-icon color='teal'> mdi-logout</v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list>
-        </v-list-item-group>
-      </v-menu>
-
-
-    </v-app-bar>
-
+    <app-bar  dark  @toggleDrawer='drawer=!drawer' ></app-bar>
     <v-app>
-
-      <v-main>
+      <v-main >
+        <v-alert v-if='$auth.loggedIn' dismissible type='success' rounded>Logged in</v-alert>
+        <v-alert v-else type='warning' dismissible   rounded> Not Logged in! You should not be in this page
+        <v-btn text rounded to='/login' outlined color='black'> Login</v-btn>
+        <v-btn text rounded to='/signup' outlined color='black'> Signup</v-btn>
+        </v-alert>
         <Nuxt></Nuxt>
       </v-main>
     </v-app>
@@ -57,14 +17,15 @@
 </template>
 
 <script>
-import NavDrawer from '../components/NavDrawer'
+import NavDrawer from '../components/partials/NavDrawer'
+import AppBar from '../components/partials/appBar'
 
 export default {
-  components: { NavDrawer },
+  components: { AppBar, NavDrawer },
   data() {
     return {
       selectedItem: -1,
-      drawer: true,
+      drawer: false,
       test: [
         {
           id: 1,
@@ -164,6 +125,12 @@ export default {
         }
       ]
     }
-  }
+  },
 }
 </script>
+
+<style>
+
+
+
+</style>
