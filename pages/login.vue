@@ -42,6 +42,12 @@
                       @click='validate'>
                       Login
                     </v-btn>
+                    <v-btn
+                      to='/signup'
+                      color=' green accent-4 '
+                      text outlined ripple>
+                      Sign Up
+                    </v-btn>
                   </v-row>
                 </v-card-actions>
               </v-form>
@@ -55,7 +61,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Login',
   components: {},
@@ -71,18 +76,18 @@ export default {
       min: v => (v && v.length >= 8) || 'Minimum 8 characters'
     }
   },
+  computed: {},
   created() {
     //code to get csrf token
   },
   methods: {
     async validate(something) {
       if (this.$refs.login.validate()) {
-        // CODE TO LOGIN USER
         try {
           let response = await this.$auth.loginWith('local', { data: this.user })
           console.log(response)
         } catch (error) {
-          console.log(error)
+          //console.log(error)
         }
       }
     }

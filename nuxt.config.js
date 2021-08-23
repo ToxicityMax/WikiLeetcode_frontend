@@ -17,12 +17,14 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['codemirror/lib/codemirror.css',
+    'codemirror/theme/base16-dark.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/markdownParser.js',
-    ],
+    { src: '~plugins/codemirror.js', ssr: false }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,76 +36,104 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify'
   ],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    ['cookie-universal-nuxt', { alias: 'cookiz' }]
   ],
-  // auth: {
-  //   strategies: {
-  //     cookie: {
-  //       cookie: {
-  //         // (optional) If set we check this cookie existence for loggedIn check
-  //         name: 'XCSRF-TOKEN'
-  //       }
-  //     },
-  //     local: {
-  //       token: {
-  //         required: false,
-  //         type: false
-  //       },
-  //       user: {
-  //         property: 'user',
-  //         autoFetch: false
-  //       },
-  //       endpoints: {
-  //         login: { url: 'login/', method: 'post', withCredentials: true },
-  //         logout: { url: 'logout', method: 'post' },
-  //         user: { url: '1login/', method: 'get' },
-  //         tokenRequired: false,
-  //         tokenType: false
-  //       }
-  //     }
-  //   }
-  // },
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURI: 'http://127.0.0.1:8000/'
-  },
-
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
-  pwa: {
-    manifest: {
-      lang: 'en'
-    }
-  },
-
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  vuetify: {
-    customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: false,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-          main: colors.teal.accent3
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/login',
+      home: '/'
+    },
+    strategies: {
+      // cookie: {
+      //   cookie: {
+      //     // (optional) If set we check this cookie existence for loggedIn check
+      //     name: 'XCSRF-TOKEN'
+      //   }
+      // },
+      local: {
+        token: {
+          required: false,
+          type: false
+        },
+        cookie: {
+          token: {
+            property: 'data.access_token',
+            required: true,
+            type: 'Bearer'
+          },
+          user: {
+            property: 'user',
+            autoFetch: false
+          },
+          endpoints: {
+            login: { url: 'login/', method: 'post', withCredentials: true },
+            logout: { url: 'logout', method: 'post' },
+            user: { url: 'login/', method: 'get' },
+            tokenRequired: false,
+            tokenType: false
+          }
         }
       }
-    }
-  },
+    },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    transpile: /@highlightjs.*/ // transpile ESM modules within all fullcalendar packages
+    // Axios module configuration: https://go.nuxtjs.dev/config-axios
+    axios: {
+      baseURL: 'http://localhost:8000/',
+    },
+    publicRuntimeConfig: {
+      axios: {
+        browserBaseURL: process.env.BROWSER_BASE_URL
+      }
+    },
+
+    privateRuntimeConfig: {
+      axios: {
+        baseURL: 'http://localhost:8000/'
+      }
+    },
+
+    // PWA module configuration: https://go.nuxtjs.dev/pwa
+    pwa: {
+      manifest: {
+        lang: 'en'
+      }
+    },
+
+    // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+    vuetify: {
+      customVariables: ['~/assets/variables.scss'],
+      treeShake: true,
+      theme: {
+        dark: false,
+        themes: {
+          dark: {
+            primary: colors.blue.darken2,
+            accent: colors.grey.darken3,
+            secondary: colors.amber.darken3,
+            info: colors.teal.lighten1,
+            warning: colors.amber.base,
+            error: colors.deepOrange.accent4,
+            success: colors.green.accent3,
+            main: colors.teal.accent3
+          }
+        }
+      }
+    },
+
+    // Build Configuration: https://go.nuxtjs.dev/config-build
+    build: {
+      transpile: /@highlightjs.*/, // transpile ESM modules within all fullcalendar packages
+      standalone: true,
+    }
   }
 }
+
