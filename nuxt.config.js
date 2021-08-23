@@ -68,20 +68,25 @@ export default {
           token: {
             property: 'data.access_token',
             required: true,
-            type: 'Bearer'
+            type: 'Bearer',
+               cookie: {
+                 // (optional) If set we check this cookie existence for loggedIn check
+                 name: 'XCSRF-TOKEN'
+               }
           },
           user: {
             property: 'user',
             autoFetch: false
           },
-          endpoints: {
-            login: { url: 'login/', method: 'post', withCredentials: true },
-            logout: { url: 'logout', method: 'post' },
-            user: { url: 'login/', method: 'get' },
-            tokenRequired: false,
-            tokenType: false
-          }
+        },
+        endpoints: {
+          login: { url: 'login/', method: 'post', withCredentials: true },
+          logout: { url: 'logout', method: 'post' },
+          user: { url: 'login/', method: 'get' },
+          tokenRequired: false,
+          tokenType: false
         }
+      }
       }
     },
 
@@ -134,6 +139,5 @@ export default {
       transpile: /@highlightjs.*/, // transpile ESM modules within all fullcalendar packages
       standalone: true,
     }
-  }
 }
 

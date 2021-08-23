@@ -14,7 +14,7 @@
       <template #activator='{ on, attrs }'>
         <v-btn
           fab small
-          depressed
+          depressedc
           v-bind='attrs'
           v-on='on'>
           <img alt='userAvatar' src='https://img.icons8.com/color/48/000000/user-male-circle--v1.png' />

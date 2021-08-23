@@ -1,4 +1,4 @@
-ou# WikiLeetcode
+# WikiLeetcode
 
 ## Build Setup
 

@@ -55,8 +55,23 @@ export const actions = {
     let response3 = await this.$axios.get('/problem')
     context.commit('allProblems', response3.data)
 
-     console.log(this.$auth.user)
-     
+
+     //Userlogin
+     let user = {
+      username:'kps',
+       password: 'kps'
+     }
+    let gettoken = await this.$axios.get('/login/');
+     console.log(gettoken)
+     try{
+       let loginResponse = await this.$auth.loginWith('local', { data: user })
+       console.log(loginResponse)
+     }
+     catch (error){
+       console.log(error)
+     }
+
+
   }
 
 }
