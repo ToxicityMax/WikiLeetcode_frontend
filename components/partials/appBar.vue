@@ -21,17 +21,18 @@
         </v-btn>
       </template>
       <v-list-item-group>
-        <v-list rounded>
-          <v-list-item color='white '>
+        <v-list class='pa-2'>
+          <v-list-item color='white'>
             <v-list-item-content style='color: lightgrey'> Settings</v-list-item-content>
             <v-list-item-icon class='pl-3'>
               <v-icon color='main'>mdi-cog</v-icon>
             </v-list-item-icon>
           </v-list-item>
-          <v-list-item color='teal accent-4'>
-            <v-list-item-content style='color: teal'>Logout</v-list-item-content>
+          <v-list-item color='white' @click='logout'>
+            <v-list-item-content style='
+            color: lightgrey'>Logout</v-list-item-content>
             <v-list-item-icon class='pl-3'>
-              <v-icon color='teal'> mdi-logout</v-icon>
+              <v-icon color='main'> mdi-logout</v-icon>
             </v-list-item-icon>
           </v-list-item>
         </v-list>
@@ -50,6 +51,10 @@ export default {
   methods:{
     toggleDrawer(){
       this.$emit('toggleDrawer')
+    },
+    async logout(){
+      console.log('logging out')
+      await this.$auth.logout()
     }
   }
 }

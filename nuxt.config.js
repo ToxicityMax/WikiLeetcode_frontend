@@ -49,44 +49,30 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      callback: '/login',
+      callback: '',
       home: '/'
     },
     strategies: {
-      // cookie: {
-      //   cookie: {
-      //     // (optional) If set we check this cookie existence for loggedIn check
-      //     name: 'XCSRF-TOKEN'
-      //   }
-      // },
       local: {
         token: {
-          required: false,
-          type: false
-        },
-        cookie: {
-          token: {
-            property: 'data.access_token',
-            required: true,
-            type: 'Bearer',
-               cookie: {
-                 // (optional) If set we check this cookie existence for loggedIn check
-                 name: 'XCSRF-TOKEN'
-               }
-          },
-          user: {
-            property: 'user',
-            autoFetch: false
-          },
+          property: 'token',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
         },
         endpoints: {
-          login: { url: 'login/', method: 'post', withCredentials: true },
-          logout: { url: 'logout', method: 'post' },
-          user: { url: 'login/', method: 'get' },
-          tokenRequired: false,
-          tokenType: false
-        }
-      }
+          login: {
+            url: '/api-token-auth/',
+            method: 'post',
+          },
+          logout: { url: 'logout/', method: 'post' },
+          user: false
+          /*user: {
+            url: '/userData',
+            method: 'get',
+          },*/
+        },
+      },
       }
     },
 

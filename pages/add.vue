@@ -134,8 +134,6 @@ export default {
       console.log('onCmBlur', codemirror)
     }
   }
-
-
 }
 </script>
 <style lang='scss' scoped>

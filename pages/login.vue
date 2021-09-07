@@ -20,17 +20,16 @@
               <v-card-title class='text-right font-weight-medium text-h4'>Login</v-card-title>
               <v-form ref='login' lazy-validation>
                 <v-card-text>
-                  <v-text-field v-model='user.username' label='Username' placeholder='Username'
+                  <v-text-field v-model='user.username' placeholder='Username'
                                 :rules='[required]'
                                 dense solo
                                 filled></v-text-field>
-                  <v-text-field :v-model='user.password'
+                  <v-text-field v-model='user.password'
                                 :append-icon="passShow ? 'mdi-eye' : 'mdi-eye-off'"
-                                :type="passShow ? 'text' : 'password'"
-                                :rules='[required,min]'
-                                label='Password'
+                                :type="passShow ? 'text':'password'"
+                                :rules='[required]'
                                 hint='At least 8 characters' placeholder='Password'
-                                counter dense solo filled
+                                counter dense solo
                                 @click:append='passShow=!passShow'></v-text-field>
                 </v-card-text>
                 <v-card-actions>
@@ -68,10 +67,12 @@ export default {
   data() {
     return {
       passShow: false,
-      user: {
-        username: '',
-        password: ''
+      user:{
+        password:null,
+        username: null,
       },
+      password: '',
+      username: '',
       required: value => !!value || 'Required.',
       min: v => (v && v.length >= 8) || 'Minimum 8 characters'
     }
@@ -84,10 +85,13 @@ export default {
     async validate(something) {
       if (this.$refs.login.validate()) {
         try {
-          let response = await this.$auth.loginWith('local', { data: this.user })
+          let response = await this.$auth.loginWith('local', { data: {
+              username: this.user.username,
+              password: this.user.password
+            } })
           console.log(response)
         } catch (error) {
-          //console.log(error)
+          console.log(error)
         }
       }
     }

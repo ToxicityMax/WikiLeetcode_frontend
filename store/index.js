@@ -1,4 +1,5 @@
 //state
+
 export const state =
   () => ({
     allProblems: [],
@@ -42,7 +43,7 @@ export const actions = {
     }
   },
 
-   async nuxtServerInit(context, { res, redirect }) {
+  async nuxtServerInit(context, { res, redirect }) {
     console.log('initializing.....')
     this.$axios.setBaseURL('http://localhost:8000/')
 
@@ -55,23 +56,9 @@ export const actions = {
     let response3 = await this.$axios.get('/problem')
     context.commit('allProblems', response3.data)
 
-
-     //Userlogin
-     let user = {
-      username:'kps',
-       password: 'kps'
-     }
-    let gettoken = await this.$axios.get('/login/');
-     console.log(gettoken)
-     try{
-       let loginResponse = await this.$auth.loginWith('local', { data: user })
-       console.log(loginResponse)
-     }
-     catch (error){
-       console.log(error)
-     }
-
-
+    if(!this.$auth.loggedIn){
+      redirect('/login')
+    }
   }
 
 }
