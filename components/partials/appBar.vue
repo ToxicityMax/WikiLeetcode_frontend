@@ -1,7 +1,7 @@
 <template>
   <v-app-bar :dark='dark' hide-on-scroll app flat dense clipped-left>
     <v-app-bar-nav-icon @click='toggleDrawer'></v-app-bar-nav-icon>
-    <v-toolbar-title>Leetcode Wiki {{ $auth.user }}</v-toolbar-title>
+    <v-toolbar-title>Leetcode Wiki</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-text-field hide-details
                   placeholder='Search'

@@ -43,7 +43,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
-    ['cookie-universal-nuxt', { alias: 'cookiz' }]
+    '@nuxtjs/toast',
   ],
   auth: {
     redirect: {
@@ -62,12 +62,12 @@ export default {
         },
         endpoints: {
           login: {
-            url: '/api-token-auth/',
+            url: '/login/',
             method: 'post',
           },
           logout: { url: 'logout/', method: 'post' },
           user: false
-          /*user: {
+        /*  user: {
             url: '/userData',
             method: 'get',
           },*/
@@ -80,12 +80,27 @@ export default {
     axios: {
       baseURL: 'http://localhost:8000/',
     },
+
+
+  toast: {
+    position: 'top-right',
+    register: [ // Register custom toasts
+      {
+        name: 'Login',
+        message: 'Logged In successfully',
+        options: {
+          theme: 'toasted-primary',
+          duration: 4000,
+          keepOnHover:true,
+        }
+      }
+    ]
+  },
     publicRuntimeConfig: {
       axios: {
         browserBaseURL: process.env.BROWSER_BASE_URL
       }
     },
-
     privateRuntimeConfig: {
       axios: {
         baseURL: 'http://localhost:8000/'
@@ -126,4 +141,3 @@ export default {
       standalone: true,
     }
 }
-

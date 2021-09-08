@@ -67,9 +67,9 @@ export default {
   data() {
     return {
       passShow: false,
-      user:{
-        password:null,
-        username: null,
+      user: {
+        password: null,
+        username: null
       },
       password: '',
       username: '',
@@ -78,18 +78,18 @@ export default {
     }
   },
   computed: {},
-  created() {
-    //code to get csrf token
-  },
   methods: {
     async validate(something) {
       if (this.$refs.login.validate()) {
         try {
-          let response = await this.$auth.loginWith('local', { data: {
+          let response = await this.$auth.loginWith('local', {
+            data: {
               username: this.user.username,
               password: this.user.password
-            } })
-          console.log(response)
+            }
+          })
+          this.$auth.setUser({ id: response.data.user_id, username: response.data.username })
+          this.$toasted.global.Login();
         } catch (error) {
           console.log(error)
         }

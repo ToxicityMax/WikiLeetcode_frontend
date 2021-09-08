@@ -1,9 +1,8 @@
 <template>
   <div>
-    <app-bar dark @toggleDrawer='toggleDrawer'></app-bar>
+    <AppBar dark @toggleDrawer='toggleDrawer'></AppBar>
     <v-app>
       <v-main>
-        <v-snackbar v-if='!$auth.loggedin' value='asdasd'> asdasdasda</v-snackbar>
         <v-alert v-if='$auth.loggedIn' dismissible type='success' rounded>Logged in</v-alert>
         <v-alert v-else type='success' dismissible rounded> Not Logged in! You should not be in this page
           <v-btn text rounded to='/login' outlined color='black'> Login</v-btn>
@@ -29,6 +28,7 @@ import NavDrawer from '../components/partials/NavDrawer'
 import AppBar from '../components/partials/appBar'
 
 export default {
+  name: 'default',
   components: { AppBar, NavDrawer },
   data() {
     return {
