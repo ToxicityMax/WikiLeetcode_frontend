@@ -42,21 +42,23 @@ export const actions = {
       }
     }
   },
-
-  async nuxtServerInit(context, { res, redirect }) {
-    console.log('initializing.....')
+  async getAllData(context){
     this.$axios.setBaseURL('http://localhost:8000/')
+    const token = this.$axios.setHeader('Authorization',this.$auth.$storage.getUniversal('_token.local'))
 
-    let response1 = await this.$axios.get('/problem/sorted')
-    context.commit('sortProblembyTopic', response1.data)
+    const response1 = await this.$axios.get('/problem/sorted')
+    context.commit('sortProblembyTopic', response1.data ,{headers: {
+        'Authorization': 'Bearer ' + token
+      }})
 
     let response2 = await this.$axios.get('/solution/')
     context.commit('allSolutions', response2.data)
 
     let response3 = await this.$axios.get('/problem')
     context.commit('allProblems', response3.data)
-
-    if(!this.$auth.loggedIn){
+  },
+   nuxtServerInit(context, { res, redirect }) {
+    if (!this.$auth.loggedIn) {
       redirect('/login')
     }
   }

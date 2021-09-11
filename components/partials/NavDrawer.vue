@@ -42,7 +42,6 @@ export default {
   methods: {
     onUpdate(item) {
       if (item.length > 0) {
-        console.log(item[0].id)
         this.$store.dispatch('setSPslug', item[0].id)
       }
     }

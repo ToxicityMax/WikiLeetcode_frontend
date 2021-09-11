@@ -54,26 +54,25 @@ export default {
     },
     strategies: {
       local: {
-        token: {
-          property: 'token',
-          global: true,
-          // required: true,
-          // type: 'Bearer'
-        },
         endpoints: {
-          login: {
-            url: '/login/',
-            method: 'post',
-          },
-          logout: { url: 'logout/', method: 'post' },
+          login: { url: '/login/', method: 'post', },
+          logout: { url: '/logout/', method: 'get' },
           user: false
-        /*  user: {
-            url: '/userData',
-            method: 'get',
-          },*/
+
         },
       },
-      }
+      token: {
+        type: 'Token',
+        property: 'token',
+        name: 'Authorization',
+        maxAge: 1800,
+        global: true,
+        required: true,
+        prefix: '_token.',
+        expirationPrefix: '_token_expiration.'
+      },
+      },
+
     },
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios

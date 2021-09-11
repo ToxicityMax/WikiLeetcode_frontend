@@ -28,7 +28,7 @@ import NavDrawer from '../components/partials/NavDrawer'
 import AppBar from '../components/partials/appBar'
 
 export default {
-  name: 'default',
+  name: 'Default',
   components: { AppBar, NavDrawer },
   data() {
     return {
@@ -40,7 +40,6 @@ export default {
       }
     }
   },
-  computed: {},
   methods: {
     toggleDrawer() {
       if (this.drawer === true) {

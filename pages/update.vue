@@ -17,6 +17,7 @@
 
 export default {
   name: 'Add',
+  middleware: 'auth',
   data() {
     return {
       model: {

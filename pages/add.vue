@@ -48,6 +48,7 @@
 
 export default {
   name: 'Add',
+  middleware: 'auth',
   data() {
     return {
       rules: {
@@ -121,7 +122,7 @@ export default {
         console.log(response.data)
       }
     },
-    onCmCursorActivity(codemirror) {
+/*    onCmCursorActivity(codemirror) {
       console.log('onCmCursorActivity', codemirror)
     },
     onCmReady(codemirror) {
@@ -132,7 +133,7 @@ export default {
     },
     onCmBlur(codemirror) {
       console.log('onCmBlur', codemirror)
-    }
+    }*/
   }
 }
 </script>

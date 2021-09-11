@@ -7,6 +7,6 @@ import Solution from '../components/Solution'
 
 export default {
   components: { Solution },
-  // middleware: 'auth'
+   middleware: 'auth',
 }
 </script>

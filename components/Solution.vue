@@ -27,10 +27,8 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-
 export default {
   name: 'Solution',
-  components: {},
   data() {
     return {
       probHeight: '80vh'
@@ -43,6 +41,8 @@ export default {
     ...mapState(['active', 'currProblem'])
   },
   created() {
+    console.log(this.$auth.$storage.getUniversal('_token.local'))
+    this.$store.dispatch('getAllData')
   },
   methods: {
 /*    editSolution() {
